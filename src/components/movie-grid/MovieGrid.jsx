@@ -23,18 +23,18 @@ const MovieGrid = props => {
             let response = null;
             if (keyword === undefined) {
                 const params = {};
-                switch(props.category) {
+                switch (props.category) {
                     case category.movie:
-                        response = await tmdbApi.getMoviesList(movieType.upcoming, {params});
+                        response = await tmdbApi.getMoviesList(movieType.upcoming, { params });
                         break;
                     default:
-                        response = await tmdbApi.getTvList(tvType.popular, {params});
+                        response = await tmdbApi.getTvList(tvType.popular, { params });
                 }
             } else {
                 const params = {
                     query: keyword
                 }
-                response = await tmdbApi.search(props.category, {params});
+                response = await tmdbApi.search(props.category, { params });
             }
             setItems(response.results);
             setTotalPage(response.total_pages);
@@ -48,19 +48,19 @@ const MovieGrid = props => {
             const params = {
                 page: page + 1
             };
-            switch(props.category) {
+            switch (props.category) {
                 case category.movie:
-                    response = await tmdbApi.getMoviesList(movieType.upcoming, {params});
+                    response = await tmdbApi.getMoviesList(movieType.upcoming, { params });
                     break;
                 default:
-                    response = await tmdbApi.getTvList(tvType.popular, {params});
+                    response = await tmdbApi.getTvList(tvType.popular, { params });
             }
         } else {
             const params = {
                 page: page + 1,
                 query: keyword
             }
-            response = await tmdbApi.search(props.category, {params});
+            response = await tmdbApi.search(props.category, { params });
         }
         setItems([...items, ...response.results]);
         setPage(page + 1);
@@ -69,11 +69,11 @@ const MovieGrid = props => {
     return (
         <>
             <div className="section mb-3">
-                <MovieSearch category={props.category} keyword={keyword}/>
+                <MovieSearch category={props.category} keyword={keyword} />
             </div>
             <div className="movie-grid">
                 {
-                    items.map((item, i) => <MovieCard category={props.category} item={item} key={i}/>)
+                    items.map((item, i) => <MovieCard category={props.category} item={item} key={i} />)
                 }
             </div>
             {
